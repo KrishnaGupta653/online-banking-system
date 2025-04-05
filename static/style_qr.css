@@ -1,0 +1,104 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3) 50%), url(photos//14.jpg);
+  background-size: cover;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff7200;
+  color: #fff;
+  padding: 20px;
+}
+
+.top-links a {
+  display: inline-block;
+  margin-right: 20px;
+  text-decoration: none;
+  color: #333;
+}
+
+.top-links a:hover {
+  text-decoration: underline;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header h2 {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+main {
+  max-width: 90%;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+h2 {
+  color: #0074a9;
+  font-size: 26px;
+}
+
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px 0;
+  background-color: #ff7200;
+  color: #fff;
+}
+
+/* CSS for spacing account info */
+.info-item {
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: medium;
+  display: inline-block;
+  width: 220px;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+}
+
+/* Additional styling for values if needed */
+.value h {
+  font-size: 10px;
+  font-weight: normal;
+}
+
+.value {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Additional styling for QR code page */
+.qr-code {
+  text-align: center;
+}
+
+.qr-container {
+  margin: 20px auto;
+}
+.qr-item {
+  font-size: 20px;
+  font-weight: bold;
+  height: auto;
+
+}
+.qr-code img {
+  max-width: 30%;
+  height: auto;
+}

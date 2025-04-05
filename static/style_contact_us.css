@@ -1,0 +1,97 @@
+
+        /* CSS styles matching the provided styles */
+        body {
+            background-color: #333333;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.) 50%), url(photos//14.jpg);
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            /* border: 5px solid #ff7200;
+            box-sizing: border-box; / */
+            color: white;
+        }
+
+        .contact-section {
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .contact-section h2 {
+            font-size: 36px;
+            color: #fff;
+        }
+
+        header {
+            background-color: #ff7200;
+            justify-content: space-between;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            margin: auto;
+            padding-top: 25px;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #fff;
+            font-size: 28px;
+        }
+
+        header a.logout-link {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            position: absolute;
+            top: 50px; /* Adjust the top position */
+            right: 10px;
+            
+        }
+        header a{
+            margin-top: -20px;
+        }
+
+        main {
+            width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: black;
+            opacity: 1;
+            height: auto;
+        }
+        h1 {
+            font-size: 28px;
+            color: #333;
+        }
+        .contact-section p{
+            margin-top: -23%;
+            color: black;  
+            line-height: 1.5;
+            font-size: 20px;
+        }
+        footer {
+            text-align: center;
+            margin-top: auto;
+            padding: 10px 0;
+            background-color: #ff7200;
+            color: #fff;
+        }
+        .icons a{
+            text-decoration: none;
+            color: #333;
+        }
+        .icons ion-icon{
+            color: #333;
+            font-size: 30px;
+            padding-left: 14px;
+            padding-top: 5px;
+            transition: 0.3s ease;
+        }
+        .icons ion-icon:hover{
+            color: #ff7200;
+        }

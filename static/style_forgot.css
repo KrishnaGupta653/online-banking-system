@@ -1,0 +1,164 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3) 50%), url(photos//14.jpg);
+    background-size: cover;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ff7200;
+    color: #fff;
+    padding: 20px;
+}
+
+.top-links a {
+    display: inline-block;
+    margin-right: 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+.top-links a:hover {
+    text-decoration: underline;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header h2 {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    max-width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h2 {
+    color: #0074a9;
+    font-size: 26px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #ff7200;
+    color: #fff;
+}
+
+/* CSS for the form and form elements */
+.forgot-form {
+    text-align: center;
+}
+
+.forgot-form label {
+    font-weight: medium;
+    display: block;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.forgot-form input[type="email"],
+.forgot-form input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.forgot-form button {
+    background-color: #0074a9;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.forgot-form button:hover {
+    background-color: #005b8a;
+}
+
+#user-id-form,
+#password-form {
+    display: none;
+}
+ 
+  label {
+    font-weight: bold;
+    font-size: 18px;
+    color: #555;
+    display: block;
+  }
+  select {
+    padding: 5px;
+    font-size: 18px;
+    margin-top: 1.5%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 70%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  #result {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#dis{
+    font-size: 28px;
+    color: #1c90d3;
+    font-weight: bold;
+    margin-bottom: auto;
+}
+#user_id_result,
+#password_result {
+    font-size: 25px;
+    color: #1c90d3;
+    margin-bottom: 10px;
+}
+.center-content {
+    text-align: center;
+    margin-top: 50px;
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: #fff;
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+  }
+  
+  .content-box {
+    background-color: #fff;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  

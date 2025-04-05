@@ -1,1 +1,107 @@
 
+        /* Add specific CSS styles for this page if needed */
+        body {
+            background-color: #333333;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to top, rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%), url(photos//3.jpg);
+            margin: 0;
+            padding: 0;
+        }
+        .dashboard-button {
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            position: absolute;
+            top: 50px; /* Adjust the top position */
+            right: 10px; /* Adjust the right position */
+        }
+        
+        header {
+            background-color: #ff7200;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            
+        }
+        header h1{
+            font-size: 30px;
+        }
+        .main {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .main h1 {
+            font-size: 25px;
+            color: #333;
+
+        }
+        .dashboard-link h3{
+            margin-top: auto;
+        }
+        .par {
+            font-size: 18px;
+            color: #333;
+            word-spacing: 10px;
+        }
+        .cn {
+            background-color: #ff7200;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .box {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            background-color: #fa801b;
+        }
+        .box-title {
+            font-weight: bold;
+            font-size: 22px;
+        }
+        .box-content {
+            font-size: 19px;
+            /* color: #555; */
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 0;
+            background-color: #ff7200;
+            color: #fff;
+        }
+        .step-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+            background-color: #fff;
+        }
+        .step-box {
+            width: 25%; /* Adjust the width as needed */
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 20px;
+
+            border-radius: 5px;
+            background-color: #fa801b;
+        }
+
+        .step-number {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: bold  ;
+        }
+        p {
+            font-size: 16px;
+        }
+        

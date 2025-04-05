@@ -1,0 +1,122 @@
+/* Custom CSS for this page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3) 50%), url(photos//14.jpg);
+  background-size: cover;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff7200;
+  color: #fff;
+  padding: 20px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header a.logout-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: auto;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff7200;
+  color: #fff;
+  padding: 20px;
+}
+.top-links a {
+  display: inline-block; /* Display the links side by side */
+  margin-right: 20px; /* Add some spacing between the links */
+  text-decoration: none; /* Remove underline from links */
+  color: #333; /* Text color for links */
+}
+.top-links a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+header a {
+  color: #333;
+}
+
+main {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+h2 {
+  color: #0074a9;
+}
+h2 {
+  color: #0074a9;
+  font-size: 26px;
+  margin-bottom: 26px;
+}
+label {
+  font-weight: bold;
+  font-size: 18px;
+  color: #555;
+  display: block;
+}
+input[type="text"],
+input[type="phone"] ,
+input[type="date"] {
+  width: 95%;
+  margin-top: 1.5%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+select {
+  padding: 5px;
+  font-size: 18px;
+  margin-top: 1.5%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 98%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+button[type="submit"] {
+  background-color: #ff9536;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button[type="submit"]:hover {
+  background-color: #ff9536;
+}
+
+.logout-message h2 {
+  margin: 20px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px 0;
+  background-color: #ff7200;
+  color: #fff;
+}

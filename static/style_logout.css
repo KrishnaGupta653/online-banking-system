@@ -1,0 +1,52 @@
+/* Custom CSS for this page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3) 50%), url(photos//14.jpg);
+  background-size: cover;
+}
+header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  background-color: #ff7200;
+  color: #fff;
+  padding: 20px;
+  
+}
+header h1 {
+  margin: 0;
+}
+header a.logout-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: auto;
+}
+header a{
+  color: #333;
+}
+main {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+h2 {
+  color: #0074a9;
+}
+.logout-message h2 {
+  margin: 20px;
+}
+footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px 0;
+  background-color: #ff7200;
+  color: #fff;
+}
+

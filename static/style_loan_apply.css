@@ -1,0 +1,113 @@
+body {
+    background-color: #333333;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3) 50%), url(photos//14.jpg);
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ff7200;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .top-links a {
+    display: inline-block; /* Display the links side by side */
+    margin-right: 20px; /* Add some spacing between the links */
+    text-decoration: none; /* Remove underline from links */
+    color: #333; /* Text color for links */
+  }
+  
+  .top-links a:hover {
+    text-decoration: underline; /* Add underline on hover */
+  }
+  
+  header h1 {
+    margin: 0;
+  }
+.main {
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px; 
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+}
+h2 {
+    font-size: 28px;
+    color: #333;
+}
+form {
+    margin-top: 20px;
+}
+
+label {
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+    display: block;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"] {
+    width: 95% ;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+button {
+    background-color: #ff9536;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #c63a84;
+}
+select {
+    padding: 5px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 95% ;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #ff7200;
+    color: #fff;
+}
+.flashes-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    height: auto;           /* Use the full viewport height */
+    color: #00ff00;
+}
+.flashes {
+    list-style: none;
+    font-size: 20px;
+    padding: 0;
+    text-align: center; /* Center the list items horizontally */
+}
