@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_view_loan_status.css') }}" >
+    <title>Loan Status</title>
+  </head>
+  <header>
+    <h1>Loan Status Checker</h1>
+    <a href="{{ url_for('index') }}" class="logout-link"
+      >Return to Dashboard</a
+    >
+  </header>
+  <body>
+    <section class="main">
+    <h1>Loan Status</h1>
+    <form action="/view_loan_status" method="POST">
+        <label for="loan_id">Enter Loan ID:</label>
+        <input type="text" id="loan_id" name="loan_id" required>
+        <button type="submit">Check Status</button>
+    </form>
+    </section>
+    <div class="center-content">
+        {% if loan_id %}
+        <div class="content-box">
+            <p>Loan ID: {{ loan_id }}</p>
+            <p>Applicant Name: {{ applicant_name }}</p>
+            <p>Contact Number: {{ contact_no }}</p>
+            <p>Email ID: {{ email_id }}</p>
+            <p>Loan Type: {{ loan_type }}</p>
+            <p>Loan Amount: {{ loan_amount }}</p>
+            <p>Loan Term: {{ loan_term }}</p>
+            <p>Applicant Date: {{ applicant_date }}</p>
+            <p>Status: {{ status }}</p>
+        </div>
+        {% endif %}
+    </div>
+    <footer>
+      <p>&copy; 2023 Banking System</p>
+    </footer>
+    </script>
+  </body>
+</html>

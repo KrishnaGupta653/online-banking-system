@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_qr.css') }}">
+    <link rel="icon" href="static/photos/icon1.ico" type="image/x-icon"> 
+    <title>Payment QR Codes</title>
+</head>
+<body>
+    <header>
+        <h1>Payment QR Codes</h1>
+        <div class="top-links">
+            <a href="javascript:history.back()" class="logout-link"><h3>Back</h3></a>
+            <a href="{{ url_for('logout') }}" class="logout-link"><h3>Logout</h3></a>
+        </div>
+    </header>
+    <main>
+        <section class="qr-codes">
+            <h2>QR Codes for Your Accounts</h2>
+            <div class="qr-container">
+                {% for qr_code_image in qr_code_images %}
+                <div class="qr-item">
+                    <h3>Bank: {{ qr_code_image.bank }}</h3>
+                    <h3>Account Number: {{ qr_code_image.account_number }}</h3>
+                    <div class="qr-code">
+                    <img src="data:image/png;base64, {{ qr_code_image.image }}" alt="Account QR Code">
+                </div>
+                </div>
+                <hr>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Banking System</p>
+    </footer>
+</body>
+</html>

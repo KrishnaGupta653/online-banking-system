@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_logout.css') }}">
+    <title>Logout</title>
+</head>
+<body>
+    <header>
+        <h1>Logout</h1>
+        <a href="{{ url_for('index') }}" class="logout-link"><h3>Return to Dashboard</h3></a>
+    </header>
+    <main>
+        <section class="logout-message">
+            <h2>You have been successfully logged out.</h2>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Banking System</p>
+    </footer>
+</body>
+</html>

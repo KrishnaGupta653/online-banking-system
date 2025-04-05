@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_admin.css') }}">
+    <link rel="icon" href="static/photos/icon1.ico" type="image/x-icon">
+    <title>Admin Page</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome, Admin</h1>
+        <a href="{{ url_for('logout') }}" class="logout-link"><h3>Logout</h3></a>
+    </header>
+    <main>
+            <section class="admin-login">
+                <h2>Admin Login</h2>
+                <form id="admin-login-form" action="/admin_login" method="POST">
+                    <label for="admin_user_id">User ID:</label>
+                    <input type="text" id="admin_user_id" name="admin_user_id" required>
+                    <label for="admin_password">Password:</label>
+                    <input type="password" id="admin_password" name="admin_password" required>
+                    <button type="submit" value="Login">Login</button>
+                </form>
+            </section>
+            
+    </main>
+    <footer>
+        <p>&copy; 2023 Banking System</p>
+    </footer>
+</body>
+</html>
