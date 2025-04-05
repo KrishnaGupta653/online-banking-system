@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_admin_details.css') }}">
+    <link rel="icon" href="static/photos/icon1.ico" type="image/x-icon">
+    <title>User Details</title>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <header>
+        <h1>Welcome, Admin</h1>
+        <a href="{{ url_for('logout') }}" class="logout-link"><h3>Logout</h3></a>
+    </header>
+    <main>
+        <section class="user-details">
+            <h2>User Details</h2>
+            <form id="search-form" action="/search_user" method="POST">
+                <label for="search_query">Search by Account ID, User ID, or Account Holder Name:</label>
+                <input type="text" id="search_query" name="search_query" required>
+                <button id="search-button" type="submit">Search</button>
+            </form>
+            <div id="search-results" style="display: none;">
+                <table>
+                    <caption>Searched User Detail</caption>
+                    <thead>
+                        <tr>
+                            <th>Account ID</th>
+                            <th>User ID</th>
+                            <th>Bank</th>
+                            <th>Account Number</th>
+                            <th>Account Type Name</th>
+                            <th>Verification ID</th>
+                            <th>Account Holder Name</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                <!-- Searched user details will be displayed here -->
+                {% if user_data %}
+                {% for user in user_data %}
+                        <tr>
+                            <td>{{ user[0]}}</td>
+                            <td>{{ user[1] }}</td>
+                            <td>{{ user[2] }}</td>
+                            <td>{{ user[3] }}</td>
+                            <td>{{ user[4] }}</td>
+                            <td>{{ user[6]}}</td>
+                            <td>{{ user[7] }}</td>
+                            <td>{{ user[14] }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+            </div>
+            <div class="table-container">
+            <table>
+                <caption>Account Details</caption>
+                <br>
+                <thead>
+                    <tr >
+                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Acc. ID</th>
+                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">User ID</th>
+                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Bank</th>
+                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Acc. No.</th>
+                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Acc. Type</th>
+                        <!-- <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">DOB</th> -->
+                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Verif. ID</th>
+                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Acc. Holder</th>
+                        <!-- <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Contact No.</th>
+                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Email id</th>
+                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Address</th> -->
+                        <!-- <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Password</th> -->
+                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Balance</th>
+                        <!-- <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Status</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through accounts data and display rows -->
+                    {% for account in  accounts[1:] %}
+                        <tr>
+                            <td>{{ account[0]}}</td>
+                            <td>{{ account[1] }}</td>
+                            <td>{{ account[2] }}</td>
+                            <td>{{ account[3] }}</td>
+                            <td>{{ account[4] }}</td>
+                            <!-- <td>{{ account[5] }}</td> -->
+                            <td>{{ account[6]}}</td>
+                            <td>{{ account[7] }}</td>
+                            <!--<td>{{ account[8] }}</td>
+                            <td>{{ account[9] }}</td>
+                            <td>{{ account.password }}</td> -->
+                            <td>{{ account[14] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            <div class="table-container">
+            <table>
+                <caption>Loan Details</caption>
+                <br>
+                <thead>
+                    <tr>
+                        <th>Loan ID</th>
+                        <th>Applicant Name</th>
+                        <th>Job Title</th>
+                        <th>Loan Type</th>
+                        <th>Loan Amount</th>
+                        <th>Loan Term (months)</th>
+                        <th>Credit Score</th>
+                        <th>Application Date</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for loan in loans[1:] %}
+                        <tr>
+                            <td>{{ loan[0] }}</td>
+                            <td>{{ loan[1] }}</td>
+                            <td>{{ loan[7] }}</td>
+                            <td>{{ loan[8] }}</td>
+                            <td>{{ loan[9] }}</td>
+                            <td>{{ loan[10] }}</td>
+                            <td>{{ loan[11] }}</td>
+                            <td>{{ loan[12] }}</td>
+                            <!-- <td>{{ loan[13] }}</td> -->
+                            <td>
+                                <select class="loan-status-dropdown">
+                                    <option value="Pending" {% if loan[13] == "Pending" %}selected{% endif %}>Pending</option>
+                                    <option value="Approved" {% if loan[13] == "Approved" %}selected{% endif %}>Approved</option>
+                                    <option value="Rejected" {% if loan[13] == "Rejected" %}selected{% endif %}>Rejected</option>
+                                </select>
+                            </td>
+                            <td><button class="update-status-button">Update Status</button></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Banking System</p>
+        <script>
+            // JavaScript to handle column resizing
+            let isResizing = false;
+            let initialX = 0;
+            let column = null;
+    
+            document.addEventListener('mousemove', function (e) {
+                if (!isResizing) return;
+    
+                const newWidth = column.offsetWidth + (e.clientX - initialX);
+                column.style.width = newWidth + 'px';
+            });
+    
+            document.addEventListener('mouseup', function () {
+                isResizing = false;
+            });
+    
+            const resizableColumns = document.querySelectorAll('.resizable');
+            resizableColumns.forEach(function (col) {
+                col.addEventListener('mousedown', function (e) {
+                    isResizing = true;
+                    initialX = e.clientX;
+                    column = col;
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $(".update-status-button").click(function() {
+                    // Get the selected status from the dropdown
+                    const newStatus = $(this).closest("tr").find(".loan-status-dropdown").val();
+                    const loanId = $(this).closest("tr").find("td:first-child").text();
+                    const updateButton = $(this);
+                    const loanUpdates = {
+                        loanId: loanId,
+                        newStatus: newStatus
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "/update_loan_status",
+                        data: loanUpdates,
+                        success: function(response) {
+                            if (response === "success") {
+                                // Update the status in the table
+                                updateButton.closest("tr").find(".loan-status-dropdown").val(newStatus);
+                                alert("Status updated successfully.");
+                            } else {
+                                alert("Status update failed.");
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+        <script>
+         document.getElementById("search-button").addEventListener("click", function (event) {
+  // Move this line to the top of the event listener
+
+  var searchResults = document.getElementById("search-results");
+
+  // Check the current display style of the search-results div
+  if (searchResults.style.display === "none") {
+    event.preventDefault(); 
+    // If it's hidden, show it
+    searchResults.style.display = "block";
+  } else {
+
+    searchResults.style.display = "none";
+  }
+});
+   </script>
+        
+</body>
+</html>
