@@ -15,25 +15,43 @@
   <body>
     <section class="main">
     <h1>Loan Status</h1>
+     {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for category, message in messages %}
+              <div class="flash-message flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
     <form action="/view_loan_status" method="POST">
         <label for="loan_id">Enter Loan ID:</label>
         <input type="text" id="loan_id" name="loan_id" required>
         <button type="submit">Check Status</button>
     </form>
     </section>
-    <div class="center-content">
-        {% if loan_id %}
+      <div class="center-content">
+      {% if loan %}
         <div class="content-box">
-            <p>Loan ID: {{ loan_id }}</p>
-            <p>Applicant Name: {{ applicant_name }}</p>
-            <p>Contact Number: {{ contact_no }}</p>
-            <p>Email ID: {{ email_id }}</p>
-            <p>Loan Type: {{ loan_type }}</p>
-            <p>Loan Amount: {{ loan_amount }}</p>
-            <p>Loan Term: {{ loan_term }}</p>
-            <p>Applicant Date: {{ applicant_date }}</p>
-            <p>Status: {{ status }}</p>
-        </div>
+          <h2>Loan Details</h2>
+          <div class="loan-info">
+            <p><strong>Loan ID:</strong> {{ loan.loan_id }}</p>
+            <p><strong>Applicant Name:</strong> {{ loan.applicant_name }}</p>
+            <p><strong>Date of Birth:</strong> {{ loan.date_of_birth }}</p>
+            <p><strong>Verification ID:</strong> {{ loan.verification_id_no }}</p>
+            <p><strong>Contact Number:</strong> {{ loan.contact_no }}</p>
+            <p><strong>Email ID:</strong> {{ loan.email_id }}</p>
+            <p><strong>Address:</strong> {{ loan.address }}</p>
+            <p><strong>Job Title:</strong> {{ loan.job_title }}</p>
+            <p><strong>Loan Type:</strong> {{ loan.loan_type }}</p>
+            <p><strong>Loan Amount:</strong> ${{ "%.2f"|format(loan.loan_amount) }}</p>
+            <p><strong>Loan Term:</strong> {{ loan.loan_term }} months</p>
+            <p><strong>Credit Score:</strong> {{ loan.credit_score }}</p>
+            <p><strong>Application Date:</strong> {{ loan.application_date }}</p>
+            <p><strong>Status:</strong> 
+              <span class="status-{{ loan.status.lower() }}">{{ loan.status }}</span>
+            </p>
+          </div>
         {% endif %}
     </div>
     <footer>

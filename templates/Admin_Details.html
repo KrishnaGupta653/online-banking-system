@@ -16,14 +16,29 @@
     <main>
         <section class="user-details">
             <h2>User Details</h2>
+            
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'danger' if category == 'error' else category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
             <form id="search-form" action="/search_user" method="POST">
                 <label for="search_query">Search by Account ID, User ID, or Account Holder Name:</label>
                 <input type="text" id="search_query" name="search_query" required>
                 <button id="search-button" type="submit">Search</button>
             </form>
-            <div id="search-results" style="display: none;">
+            
+            <!-- Search Results Section -->
+            {% if user_data %}
+            <div id="search-results">
                 <table>
-                    <caption>Searched User Detail</caption>
+                    <caption>Searched User Details</caption>
                     <thead>
                         <tr>
                             <th>Account ID</th>
@@ -37,185 +52,188 @@
                         </tr>
                     </thead>
                     <tbody>
-                <!-- Searched user details will be displayed here -->
-                {% if user_data %}
-                {% for user in user_data %}
+                        {% for user in user_data %}
                         <tr>
-                            <td>{{ user[0]}}</td>
+                            <td>{{ user[0] }}</td>
                             <td>{{ user[1] }}</td>
                             <td>{{ user[2] }}</td>
                             <td>{{ user[3] }}</td>
                             <td>{{ user[4] }}</td>
-                            <td>{{ user[6]}}</td>
+                            <td>{{ user[6] }}</td>
                             <td>{{ user[7] }}</td>
-                            <td>{{ user[14] }}</td>
+                            <td>₹{{ "%.2f"|format(user[14]) }}</td>
                         </tr>
-                    {% endfor %}
-                    {% endif %}
-                </tbody>
-            </table>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
+            {% endif %}
+            
+            <!-- All Accounts Table -->
             <div class="table-container">
-            <table>
-                <caption>Account Details</caption>
-                <br>
-                <thead>
-                    <tr >
-                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Acc. ID</th>
-                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">User ID</th>
-                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Bank</th>
-                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Acc. No.</th>
-                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Acc. Type</th>
-                        <!-- <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">DOB</th> -->
-                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Verif. ID</th>
-                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Acc. Holder</th>
-                        <!-- <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Contact No.</th>
-                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Email id</th>
-                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Address</th> -->
-                        <!-- <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Password</th> -->
-                        <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Balance</th>
-                        <!-- <th class="resizable" draggable="true" ondrag="startResize(event)" ondragend="endResize(event)">Status</th> -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Loop through accounts data and display rows -->
-                    {% for account in  accounts[1:] %}
+                <table>
+                    <caption>Account Details ({{ accounts|length }} accounts)</caption>
+                    <br>
+                    <thead>
                         <tr>
-                            <td>{{ account[0]}}</td>
-                            <td>{{ account[1] }}</td>
-                            <td>{{ account[2] }}</td>
-                            <td>{{ account[3] }}</td>
-                            <td>{{ account[4] }}</td>
-                            <!-- <td>{{ account[5] }}</td> -->
-                            <td>{{ account[6]}}</td>
-                            <td>{{ account[7] }}</td>
-                            <!--<td>{{ account[8] }}</td>
-                            <td>{{ account[9] }}</td>
-                            <td>{{ account.password }}</td> -->
-                            <td>{{ account[14] }}</td>
+                            <th class="resizable">Acc. ID</th>
+                            <th class="resizable">User ID</th>
+                            <th class="resizable">Bank</th>
+                            <th class="resizable">Acc. No.</th>
+                            <th class="resizable">Acc. Type</th>
+                            <th class="resizable">Verif. ID</th>
+                            <th class="resizable">Acc. Holder</th>
+                            <th class="resizable">Balance</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% if accounts %}
+                            {% for account in accounts %}
+                            <tr>
+                                <td>{{ account[0] }}</td>
+                                <td>{{ account[1] }}</td>
+                                <td>{{ account[2] }}</td>
+                                <td>{{ account[3] }}</td>
+                                <td>{{ account[4] }}</td>
+                                <td>{{ account[6] }}</td>
+                                <td>{{ account[7] }}</td>
+                                <td>₹{{ "%.2f"|format(account[14]) }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="8">No accounts found</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
             </div>
+            
+            <!-- Loan Details Table -->
             <div class="table-container">
-            <table>
-                <caption>Loan Details</caption>
-                <br>
-                <thead>
-                    <tr>
-                        <th>Loan ID</th>
-                        <th>Applicant Name</th>
-                        <th>Job Title</th>
-                        <th>Loan Type</th>
-                        <th>Loan Amount</th>
-                        <th>Loan Term (months)</th>
-                        <th>Credit Score</th>
-                        <th>Application Date</th>
-                        <th>Status</th>
-                        <th>Update</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for loan in loans[1:] %}
+                <table>
+                    <caption>Loan Details ({{ loans|length }} loans)</caption>
+                    <br>
+                    <thead>
                         <tr>
-                            <td>{{ loan[0] }}</td>
-                            <td>{{ loan[1] }}</td>
-                            <td>{{ loan[7] }}</td>
-                            <td>{{ loan[8] }}</td>
-                            <td>{{ loan[9] }}</td>
-                            <td>{{ loan[10] }}</td>
-                            <td>{{ loan[11] }}</td>
-                            <td>{{ loan[12] }}</td>
-                            <!-- <td>{{ loan[13] }}</td> -->
-                            <td>
-                                <select class="loan-status-dropdown">
-                                    <option value="Pending" {% if loan[13] == "Pending" %}selected{% endif %}>Pending</option>
-                                    <option value="Approved" {% if loan[13] == "Approved" %}selected{% endif %}>Approved</option>
-                                    <option value="Rejected" {% if loan[13] == "Rejected" %}selected{% endif %}>Rejected</option>
-                                </select>
-                            </td>
-                            <td><button class="update-status-button">Update Status</button></td>
+                            <th>Loan ID</th>
+                            <th>Applicant Name</th>
+                            <th>Job Title</th>
+                            <th>Loan Type</th>
+                            <th>Loan Amount</th>
+                            <th>Loan Term (months)</th>
+                            <th>Credit Score</th>
+                            <th>Application Date</th>
+                            <th>Status</th>
+                            <th>Update</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        {% if loans %}
+                            {% for loan in loans %}
+                            <tr>
+                                <td>{{ loan[0] }}</td>
+                                <td>{{ loan[1] }}</td>
+                                <td>{{ loan[7] or 'N/A' }}</td>
+                                <td>{{ loan[8] }}</td>
+                                <td>₹{{ "%.2f"|format(loan[9]) }}</td>
+                                <td>{{ loan[10] }}</td>
+                                <td>{{ loan[11] or 'N/A' }}</td>
+                                <td>{{ loan[12] }}</td>
+                                <td>
+                                    <select class="loan-status-dropdown" data-loan-id="{{ loan[0] }}">
+                                        <option value="Pending" {% if loan[13] == "Pending" %}selected{% endif %}>Pending</option>
+                                        <option value="Approved" {% if loan[13] == "Approved" %}selected{% endif %}>Approved</option>
+                                        <option value="Rejected" {% if loan[13] == "Rejected" %}selected{% endif %}>Rejected</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button class="update-status-button" data-loan-id="{{ loan[0] }}">Update Status</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="10">No loans found</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
         </section>
     </main>
+    
     <footer>
         <p>&copy; 2023 Banking System</p>
-        <script>
-            // JavaScript to handle column resizing
-            let isResizing = false;
-            let initialX = 0;
-            let column = null;
-    
-            document.addEventListener('mousemove', function (e) {
-                if (!isResizing) return;
-    
-                const newWidth = column.offsetWidth + (e.clientX - initialX);
-                column.style.width = newWidth + 'px';
+    </footer>
+
+    <script>
+        // JavaScript to handle column resizing
+        let isResizing = false;
+        let initialX = 0;
+        let column = null;
+
+        document.addEventListener('mousemove', function (e) {
+            if (!isResizing) return;
+            const newWidth = column.offsetWidth + (e.clientX - initialX);
+            column.style.width = newWidth + 'px';
+        });
+
+        document.addEventListener('mouseup', function () {
+            isResizing = false;
+        });
+
+        const resizableColumns = document.querySelectorAll('.resizable');
+        resizableColumns.forEach(function (col) {
+            col.addEventListener('mousedown', function (e) {
+                isResizing = true;
+                initialX = e.clientX;
+                column = col;
             });
-    
-            document.addEventListener('mouseup', function () {
-                isResizing = false;
-            });
-    
-            const resizableColumns = document.querySelectorAll('.resizable');
-            resizableColumns.forEach(function (col) {
-                col.addEventListener('mousedown', function (e) {
-                    isResizing = true;
-                    initialX = e.clientX;
-                    column = col;
-                });
-            });
-        </script>
-        <script>
-            $(document).ready(function() {
-                $(".update-status-button").click(function() {
-                    // Get the selected status from the dropdown
-                    const newStatus = $(this).closest("tr").find(".loan-status-dropdown").val();
-                    const loanId = $(this).closest("tr").find("td:first-child").text();
-                    const updateButton = $(this);
-                    const loanUpdates = {
+        });
+
+        // jQuery for loan status updates
+        $(document).ready(function() {
+            $(".update-status-button").click(function() {
+                const loanId = $(this).data('loan-id');
+                const newStatus = $(this).closest("tr").find(".loan-status-dropdown").val();
+                const updateButton = $(this);
+                
+                // Disable button during update
+                updateButton.prop('disabled', true).text('Updating...');
+                
+                $.ajax({
+                    type: "POST",
+                    url: "/update_loan_status",
+                    data: {
                         loanId: loanId,
                         newStatus: newStatus
-                    };
-                    $.ajax({
-                        type: "POST",
-                        url: "/update_loan_status",
-                        data: loanUpdates,
-                        success: function(response) {
-                            if (response === "success") {
-                                // Update the status in the table
-                                updateButton.closest("tr").find(".loan-status-dropdown").val(newStatus);
-                                alert("Status updated successfully.");
-                            } else {
-                                alert("Status update failed.");
-                            }
+                    },
+                    success: function(response) {
+                        if (response === "success") {
+                            alert("Status updated successfully.");
+                            // Update the dropdown to reflect the change
+                            updateButton.closest("tr").find(".loan-status-dropdown").val(newStatus);
+                        } else {
+                            alert("Status update failed.");
                         }
-                    });
+                    },
+                    error: function() {
+                        alert("Error occurred while updating status.");
+                    },
+                    complete: function() {
+                        // Re-enable button
+                        updateButton.prop('disabled', false).text('Update Status');
+                    }
                 });
             });
-        </script>
-        <script>
-         document.getElementById("search-button").addEventListener("click", function (event) {
-  // Move this line to the top of the event listener
+        });
 
-  var searchResults = document.getElementById("search-results");
-
-  // Check the current display style of the search-results div
-  if (searchResults.style.display === "none") {
-    event.preventDefault(); 
-    // If it's hidden, show it
-    searchResults.style.display = "block";
-  } else {
-
-    searchResults.style.display = "none";
-  }
-});
-   </script>
-        
+        // Search functionality
+        document.getElementById("search-button").addEventListener("click", function (event) {
+            // Let the form submit normally - remove the preventDefault
+            // The server will handle showing/hiding search results
+        });
+    </script>
 </body>
 </html>

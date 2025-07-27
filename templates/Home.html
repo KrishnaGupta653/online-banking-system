@@ -12,13 +12,7 @@
   <body>
     <header>
       <h1>Welcome to Our Online Banking System</h1>
-      <div class="dashboard-link">
-        <a href="{{ url_for('index') }}"
-          ><button class="dashboard-button">
-            <h3>Return to Dashboard</h3>
-          </button></a
-        >
-      </div>
+      <a href="{{ url_for('index') }}" class="logout-link">Return to Dashboard</a>
     </header>
     <section class="main">
       <h1>Secure and Convenient Banking Services</h1>

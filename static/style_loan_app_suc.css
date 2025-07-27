@@ -1,97 +1,180 @@
+/* Enhanced Loan Application Success CSS with Consistent Styling */
 body {
   background-color: #333333;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3) 50%), url(photos//14.jpg);
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.4) 50%), url(photos/14.jpg);
   background-size: cover;
+  background-attachment: fixed;
   margin: 0;
   padding: 0;
   color: white;
+  min-height: 100vh;
 }
 
-header {
-  background-color: #ff7200;
-  color: #fff;
-  text-align: center;
-  padding: 20px 0;
-  position: relative;
-}
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ff7200;
+  background: linear-gradient(45deg, #ff7200, #ff8c00);
   color: #fff;
   padding: 24px;
+  box-shadow: 0 4px 15px rgba(255, 114, 0, 0.3);
 }
+
 header h1 {
   margin: 0;
   padding: 10px;
+  font-size: 28px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
+
 header a.logout-link {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+header a.logout-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .main {
   max-width: 800px;
-  margin: 20px auto;
-  background-color: #fff;
-  backdrop-filter: blur(10px);
-  padding: 20px;
-  border: 1px solid #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.account-info {
-  max-width: 800px;
-  margin: 20px auto;
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.info-item {
-  margin-bottom: 20px; /* Adjust the margin as needed */
-}
-.account-info h2{
-  color:#000
-}
-.label {
-  font-weight: medium; /* Make the labels bold if desired */
-  display: inline-block;
-  width: 220px; /* Adjust the width to control spacing */
-  font-family: Arial, sans-serif;
-  font-size: 20px;
-  color: #000;
+  margin: 30px auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-/* Additional styling for values if needed */
+.account-info {
+  max-width: 800px;
+  margin: 30px auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.info-item {
+  margin-bottom: 25px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  border-left: 4px solid #ff7200;
+  transition: all 0.3s ease;
+}
+
+.info-item:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.account-info h2 {
+  color: #0074a9;
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.label {
+  font-weight: 600;
+  display: inline-block;
+  width: 220px;
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
 .value {
   font-size: 20px;
   font-weight: bold;
   color: #0074a9;
-  /* Add any specific styling for the values here */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  font-size: 28px;
+  font-size: 30px;
   color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 p.success-message {
-  /* color: #09ff00; */
   color: #0074a9;
-  font-size: 20px;
+  font-size: 22px;
   text-align: center;
+  font-weight: 600;
+  background: rgba(0, 116, 169, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #0074a9;
+  margin: 20px 0;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 footer {
   text-align: center;
-  margin-top: 20px;
-  padding: 10px 0;
-  background-color: #ff7200;
+  margin-top: 40px;
+  padding: 20px 0;
+  background: linear-gradient(45deg, #ff7200, #ff8c00);
   color: #fff;
+  box-shadow: 0 -4px 15px rgba(255, 114, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  header h1 {
+    font-size: 24px;
+  }
+  
+  .main,
+  .account-info {
+    margin: 20px 10px;
+    padding: 20px;
+  }
+  
+  .label {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+  
+  p.success-message {
+    font-size: 18px;
+  }
 }

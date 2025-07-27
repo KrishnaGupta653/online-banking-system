@@ -1,164 +1,261 @@
+/* Enhanced Forgot Password CSS with Consistent Styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3) 50%), url(photos//14.jpg);
-    background-size: cover;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.4) 50%), url(photos/14.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ff7200;
-    color: #fff;
-    padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(45deg, #ff7200, #ff8c00);
+  color: #fff;
+  padding: 20px 24px;
+  box-shadow: 0 4px 15px rgba(255, 114, 0, 0.3);
 }
 
 .top-links a {
-    display: inline-block;
-    margin-right: 20px;
-    text-decoration: none;
-    color: #333;
+  display: inline-block;
+  margin-left: 20px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .top-links a:hover {
-    text-decoration: underline;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 header h1 {
-    margin: 0;
+  margin: 0;
+  font-size: 28px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 header h2 {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 main {
-    max-width: 90%;
-    margin: 20px auto;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+  max-width: 90%;
+  margin: 30px auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 h2 {
-    color: #0074a9;
-    font-size: 26px;
+  color: #0074a9;
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 footer {
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px 0;
-    background-color: #ff7200;
-    color: #fff;
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  background: linear-gradient(45deg, #ff7200, #ff8c00);
+  color: #fff;
+  box-shadow: 0 -4px 15px rgba(255, 114, 0, 0.3);
 }
 
 /* CSS for the form and form elements */
 .forgot-form {
-    text-align: center;
+  text-align: center;
 }
 
 .forgot-form label {
-    font-weight: medium;
-    display: block;
-    font-size: 20px;
-    margin-top: 10px;
+  font-weight: 600;
+  display: block;
+  font-size: 18px;
+  margin-top: 20px;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .forgot-form input[type="email"],
 .forgot-form input[type="text"] {
-    width: 60%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+  width: 60%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.forgot-form input[type="email"]:focus,
+.forgot-form input[type="text"]:focus {
+  border-color: #ff7200;
+  outline: none;
+  box-shadow: 0 0 15px rgba(255, 114, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 .forgot-form button {
-    background-color: #0074a9;
-    color: white;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 18px;
-    margin-top: 10px;
+  background: linear-gradient(45deg, #0074a9, #005b8a);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 116, 169, 0.3);
 }
 
 .forgot-form button:hover {
-    background-color: #005b8a;
+  background: linear-gradient(45deg, #005b8a, #004a75);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 116, 169, 0.4);
 }
 
 #user-id-form,
 #password-form {
-    display: none;
+  display: none;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 25px;
+  border-radius: 15px;
+  margin: 20px 0;
+  border-left: 4px solid #ff7200;
 }
- 
-  label {
-    font-weight: bold;
-    font-size: 18px;
-    color: #555;
-    display: block;
-  }
-  select {
-    padding: 5px;
-    font-size: 18px;
-    margin-top: 1.5%;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 70%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-  }
-  
-  #result {
-    display: none;
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+label {
+  font-weight: 600;
+  font-size: 18px;
+  color: #333;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
-#dis{
-    font-size: 28px;
-    color: #1c90d3;
-    font-weight: bold;
-    margin-bottom: auto;
+
+select {
+  padding: 15px;
+  font-size: 16px;
+  margin-top: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  width: 70%;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
 }
+
+select:focus {
+  border-color: #ff7200;
+  outline: none;
+  box-shadow: 0 0 15px rgba(255, 114, 0, 0.2);
+}
+
+#result {
+  display: none;
+  margin-top: 30px;
+  padding: 25px;
+  border: 2px solid #0074a9;
+  border-radius: 15px;
+  background: rgba(0, 116, 169, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+#dis {
+  font-size: 24px;
+  color: #0074a9;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
 #user_id_result,
 #password_result {
-    font-size: 25px;
-    color: #1c90d3;
-    margin-bottom: 10px;
+  font-size: 22px;
+  color: #0074a9;
+  margin-bottom: 10px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 10px;
+  border-left: 4px solid #28a745;
 }
+
 .center-content {
+  text-align: center;
+  margin-top: 30px;
+  max-width: 800px;
+  margin: 30px auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  font-size: 18px;
+}
+
+.content-box {
+  background: rgba(0, 116, 169, 0.1);
+  color: #0074a9;
+  padding: 25px;
+  border-radius: 15px;
+  border: 2px solid #0074a9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 15px;
     text-align: center;
-    margin-top: 50px;
-    max-width: 800px;
-    margin: 40px auto;
-    background-color: #fff;
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    border: 1px solid #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-size: 18px;
   }
   
-  .content-box {
-    background-color: #fff;
-    color: #fff;
-    padding: 20px;
-    border-radius: 5px;
+  .top-links {
+    margin-top: 15px;
   }
   
+  .top-links a {
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  
+  main {
+    margin: 20px 10px;
+    padding: 20px;
+  }
+  
+  .forgot-form input[type="email"],
+  .forgot-form input[type="text"] {
+    width: 90%;
+  }
+  
+  select {
+    width: 90%;
+  }
+  
+  .center-content {
+    margin: 20px 10px;
+    padding: 20px;
+  }
+}

@@ -5,28 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style_admin.css') }}">
     <link rel="icon" href="static/photos/icon1.ico" type="image/x-icon">
-    <title>Admin Page</title>
+    <title>Admin Login - Banking System</title>
 </head>
 <body>
     <header>
-        <h1>Welcome, Admin</h1>
-        <a href="{{ url_for('logout') }}" class="logout-link"><h3>Logout</h3></a>
+        <h1>Admin Portal</h1>
+        <nav class="top-links" role="navigation" aria-label="Main navigation">
+            <a href="{{ url_for('logout') }}" class="logout-link" aria-label="Logout from admin portal">
+                <h3>Logout</h3>
+            </a>
+        </nav>
     </header>
+    
     <main>
-            <section class="admin-login">
-                <h2>Admin Login</h2>
-                <form id="admin-login-form" action="/admin_login" method="POST">
-                    <label for="admin_user_id">User ID:</label>
-                    <input type="text" id="admin_user_id" name="admin_user_id" required>
-                    <label for="admin_password">Password:</label>
-                    <input type="password" id="admin_password" name="admin_password" required>
-                    <button type="submit" value="Login">Login</button>
+        <section class="admin-login" aria-labelledby="admin-login-heading">
+            <h2 id="admin-login-heading">Admin Login</h2>
+            <div class="login-container">
+                <form id="admin-login-form" action="/admin_login" method="POST" novalidate>
+                    <div class="form-group">
+                        <label for="admin_user_id" class="form-label">User ID:</label>
+                        <input 
+                            type="text" 
+                            id="admin_user_id" 
+                            name="admin_user_id" 
+                            class="form-input"
+                            required 
+                            autocomplete="username"
+                            aria-describedby="user-id-error"
+                            placeholder="Enter your admin user ID"
+                        >
+                        <span id="user-id-error" class="error-message" role="alert" aria-live="polite"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="admin_password" class="form-label">Password:</label>
+                        <div class="password-input-container">
+                            <input 
+                                type="password" 
+                                id="admin_password" 
+                                name="admin_password" 
+                                class="form-input"
+                                required 
+                                autocomplete="current-password"
+                                aria-describedby="password-error"
+                                placeholder="Enter your password"
+                            >
+                            <button 
+                                type="button" 
+                                class="password-toggle" 
+                                aria-label="Toggle password visibility"
+                                tabindex="-1"
+                            >👁️</button>
+                        </div>
+                        <span id="password-error" class="error-message" role="alert" aria-live="polite"></span>
+                    </div>
+                    
+                    <button type="submit" class="login-button" id="login-btn">
+                        <span class="button-text">Login</span>
+                        <span class="loading-spinner" style="display: none;">⟳</span>
+                    </button>
                 </form>
-            </section>
-            
+                
+                <div class="login-help">
+                    <p><small>Authorized personnel only. Unauthorized access is prohibited.</small></p>
+                </div>
+            </div>
+        </section>
     </main>
+    
     <footer>
-        <p>&copy; 2023 Banking System</p>
+        <p>&copy; 2023 Banking System. All rights reserved.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('admin-login-form');
+            const userIdInput = document.getElementById('admin_user_id');
+            const passwordInput = document.getElementById('admin_password');
+            const passwordToggle = document.querySelector('.password-toggle');
+            const loginButton = document.getElementById('login-btn');
+            const buttonText = loginButton.querySelector('.button-text');
+            const loadingSpinner = loginButton.querySelector('.loading-spinner');
+
+            // Password visibility toggle
+            passwordToggle.addEventListener('click', function() {
+                const isPassword = passwordInput.type === 'password';
+                passwordInput.type = isPassword ? 'text' : 'password';
+                this.textContent = isPassword ? '🙈' : '👁️';
+                this.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+            });
+
+            // Form validation
+            function validateField(input, errorElement, message) {
+                if (!input.value.trim()) {
+                    errorElement.textContent = message;
+                    input.classList.add('error');
+                    return false;
+                } else {
+                    errorElement.textContent = '';
+                    input.classList.remove('error');
+                    return true;
+                }
+            }
+
+            // Real-time validation
+            userIdInput.addEventListener('blur', function() {
+                validateField(this, document.getElementById('user-id-error'), 'User ID is required');
+            });
+
+            passwordInput.addEventListener('blur', function() {
+                validateField(this, document.getElementById('password-error'), 'Password is required');
+            });
+
+            // Clear errors on input
+            [userIdInput, passwordInput].forEach(input => {
+                input.addEventListener('input', function() {
+                    this.classList.remove('error');
+                    const errorElement = document.getElementById(this.getAttribute('aria-describedby'));
+                    if (errorElement) {
+                        errorElement.textContent = '';
+                    }
+                });
+            });
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const userIdValid = validateField(userIdInput, document.getElementById('user-id-error'), 'User ID is required');
+                const passwordValid = validateField(passwordInput, document.getElementById('password-error'), 'Password is required');
+                
+                if (userIdValid && passwordValid) {
+                    // Show loading state
+                    loginButton.disabled = true;
+                    buttonText.style.display = 'none';
+                    loadingSpinner.style.display = 'inline-block';
+                    
+                    // Submit form after showing loading state
+                    setTimeout(() => {
+                        this.submit();
+                    }, 100);
+                }
+            });
+
+            // Handle browser back/forward
+            window.addEventListener('pageshow', function(event) {
+                if (event.persisted) {
+                    // Reset form state if page is loaded from cache
+                    loginButton.disabled = false;
+                    buttonText.style.display = 'inline-block';
+                    loadingSpinner.style.display = 'none';
+                }
+            });
+
+            // Auto-focus on first input
+            userIdInput.focus();
+        });
+    </script>
 </body>
 </html>
