@@ -1,0 +1,186 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3) 50%), url(photos//14.jpg);
+    background-size: cover;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ff7200;
+    color: #fff;
+    padding: 20px;
+}
+
+
+.top-links a {
+    display: inline-block;
+    margin-right: 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+.top-links a:hover {
+    text-decoration: underline;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header h2 {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    max-width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h2 {
+    color: #0074a9;
+    font-size: 26px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #ff7200;
+    color: #fff;
+}
+
+/* CSS for the form and form elements */
+.search-form {
+    text-align: center;
+}
+
+.search-form label {
+    font-weight: medium;
+    display: block;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.search-form input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.search-form button {
+    background-color: #0074a9;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.search-form button:hover {
+    background-color: #005b8a;
+}
+
+.user-details {
+    margin-top: 20px;
+}
+label {
+    font-weight: bold;
+    font-size: 18px;
+    color: #555;
+    display: block;
+  }
+  input[type="text"],
+  input[type="password"]  {
+    width: 95%;
+    margin-top: 1.5%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  button[type="submit"] {
+    background-color: #ff9536;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+/* table {
+    width: auto;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+table caption {
+    font-weight: bold;
+    font-size: 24px;
+    color: #0074a9;
+}
+table th {
+    background-color: #0074a9;
+    color: #fff;
+    padding: 10px;
+    
+}
+
+table td, table th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 10px;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+} */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed; /* Set the table layout to fixed */
+}
+
+table caption {
+    font-weight: bold;
+    font-size: 24px;
+    color: #0074a9;
+}
+
+table th {
+    background-color: #0074a9;
+    color: #fff;
+    padding: 10px;
+}
+
+table td, table th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 10px;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis for long text */
+    width: 10%; /* Set a fixed width for each cell */
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

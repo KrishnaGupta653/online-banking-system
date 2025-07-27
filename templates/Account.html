@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_acc.css') }}">
+    <link rel="icon" href="static/photos/icon1.ico" type="image/x-icon"> 
+    <title>Account Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome, {{ account_data[7] }}</h1>
+        <nav class="top-links" role="navigation" aria-label="Main navigation">
+            <a href="{{ url_for('payment_and_transfer') }}" class="nav-link" aria-label="Payment and Transfer">
+                <h3>Payment And Transfer</h3>
+            </a>
+            <a href="{{ url_for('qr_code') }}" class="nav-link" aria-label="QR Code">
+                <h3>QR Code</h3>
+            </a>
+            <a href="{{ url_for('logout') }}" class="logout-link" aria-label="Logout">
+                <h3>Logout</h3>
+            </a>
+        </nav>
+    </header>        
+    
+    <main>
+        <section class="account-info" aria-labelledby="user-details-heading">
+            <h2 id="user-details-heading">Common User Details</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="label">User ID</span>
+                    <span class="value"><strong>:</strong> {{ account_data[1] }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Account Holder</span>
+                    <span class="value"><strong>:</strong> {{ account_data[7] }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Verification ID No.</span>
+                    <span class="value"><strong>:</strong> {{ account_data[6] }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Contact Info</span>
+                    <span class="value"><strong>:</strong> {{ account_data[8] }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Mail ID</span>
+                    <span class="value"><strong>:</strong> {{ account_data[9] }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Address</span>
+                    <span class="value"><strong>:</strong> {{ account_data[10] }}</span>
+                </div>
+            </div>
+        </section>
+        
+        <section class="account-details" aria-labelledby="account-details-heading">
+            {% if bank_accounts %}
+                <h2 id="account-details-heading">Account Details</h2>
+                {% for account in bank_accounts %}
+                    <div class="bank-account" role="region" aria-label="Bank account {{ loop.index }}">
+                        <div class="account-grid">
+                            <div class="info-item">
+                                <span class="label">Bank Name</span>
+                                <span class="value"><strong>:</strong> {{ account['bank_name'] }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Account ID</span>
+                                <span class="value"><strong>:</strong> {{ account['account_id'] }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Account Number</span>
+                                <span class="value"><strong>:</strong> {{ account['account_number'] }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Account Type</span>
+                                <span class="value"><strong>:</strong> {{ account['account_type_name'] }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Password</span>
+                                <span class="value password-field">
+                                    <strong>:</strong> 
+                                    <span class="password-hidden" data-password="{{ account['password'] }}">••••••••</span>
+                                    <button class="toggle-password" type="button" aria-label="Toggle password visibility">👁️</button>
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Account Opening Date</span>
+                                <span class="value"><strong>:</strong> {{ account['account_opening_date'] }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Account Balance</span>
+                                <span class="value balance-amount"><strong>:</strong> &#8377;{{ account['balance'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% if not loop.last %}
+                        <hr class="account-separator">
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <div class="error-message" role="alert">
+                    <h3>No bank accounts found for this user.</h3>
+                </div>
+            {% endif %}
+        </section>
+        
+        <section class="total-balance" aria-labelledby="total-balance-heading"> 
+            <h2 id="total-balance-heading">Total Balance</h2>
+            <p class="balance-amount" role="text" aria-label="Total balance amount">&#8377;{{ total_balance }}</p>
+        </section>
+    
+        <section class="transactions" aria-labelledby="transactions-heading">
+            <h2 id="transactions-heading">Transaction History</h2>
+            <div class="table-wrapper">
+                <table class="transactions-table" role="table" aria-label="Transaction history">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Account ID</th>
+                            <th scope="col">Bank</th>
+                            <th scope="col">Recipient's Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Recipient Type</th>
+                            <th scope="col">Phone/Account No.</th>
+                            <th scope="col">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for transaction in transaction_data %}
+                        <tr>
+                            <td>{{ transaction[3] }}</td>
+                            <td>{{ transaction[0] }}</td>
+                            <td>{{ transaction[2] }}</td>
+                            <td>{{ transaction[4] }}</td>
+                            <td>{{ transaction[5] }}</td>
+                            <td>{{ transaction[6] }}</td>
+                            <td>{{ transaction[7] }}</td>
+                            <td class="amount">{{ transaction[8] }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="8" class="no-data">No transactions found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Banking System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Password visibility toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButtons = document.querySelectorAll('.toggle-password');
+            
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const passwordSpan = this.previousElementSibling;
+                    const isHidden = passwordSpan.textContent === '••••••••';
+                    
+                    if (isHidden) {
+                        passwordSpan.textContent = passwordSpan.dataset.password;
+                        this.textContent = '🙈';
+                        this.setAttribute('aria-label', 'Hide password');
+                    } else {
+                        passwordSpan.textContent = '••••••••';
+                        this.textContent = '👁️';
+                        this.setAttribute('aria-label', 'Show password');
+                    }
+                });
+            });
+            
+            // Add loading states for navigation links
+            const navLinks = document.querySelectorAll('.nav-link, .logout-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    this.style.opacity = '0.7';
+                    this.style.pointerEvents = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

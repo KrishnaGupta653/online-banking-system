@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loan Applied</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_loan_app_suc.css') }}" />
+  </head>
+  <body>
+    <header>
+      <h1>Loan Applied</h1>
+      <a href="{{ url_for('index') }}" class="logout-link">Return to Dashboard</a>
+    </header>
+    <div class="main">
+      <p class="success-message">
+        Loan application submitted successfully!
+      </p>
+    </div>
+    <section class="account-info">
+      <h2>Loan Information</h2>
+      <div class="info-item">
+          <span class="label">Loan Id</span>
+          <span class="value"><b>:</b>   {{ account_data[0] }}</span>
+      </div>
+      <div class="info-item">
+          <span class="label">Applicant Name</span>
+          <span class="value"><b>:</b> {{ account_data[1] }}</span>
+      </div>
+      <div class="info-item">
+          <span class="label">Date of Birth</span>
+          <span class="value"><b>:</b> {{ account_data[2] }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Verification Id</span>
+        <span class="value"><b>:</b>   {{ account_data[3] }}</span>
+    </div>
+      <div class="info-item">
+        <span class="label">Contact Info</span>
+        <span class="value"><b>:</b>   {{ account_data[4] }}</span>
+    </div>
+    <div class="info-item">
+        <span class="label">Mail Id</span>
+        <span class="value"><b>:</b>   {{ account_data[5] }}</span>
+    </div>
+      <div class="info-item">
+          <span class="label">Address</span>
+          <span class="value"><b>:</b>   {{ account_data[6] }}</span>
+      </div>
+      
+      <div class="info-item">
+          <span class="label">Job Title</span>
+          <span class="value"><b>:</b> {{ account_data[7] }}</span>
+      </div>
+      <div class="info-item">
+          <span class="label">Loan Type</span>
+          <span class="value"><b>:</b> {{ account_data[8] }}</span>
+      </div>
+      <div class="info-item">
+          <span class="label">Loan Amount</span>
+          <span class="value"><b>:</b> {{ account_data[9] }}</span>
+      </div>
+      <div class="info-item">
+          <span class="label">Loan Term</span>
+          <span class="value"><b>:</b>   {{ account_data[10] }}</span>
+      </div>
+      <div class="info-item">
+          <span class="label">Credit Score</span>
+          <span class="value"><b>:</b>   {{ account_data[11] }}</span>
+      </div>
+      <div class="info-item">
+          <span class="label">Application Date</span>
+          <span class="value"><b>:</b>   {{ account_data[12] }}</span>
+      </div>
+      <div class="info-item">
+          <span class="label">Status</span>
+          <span class="value"><b>:</b>   {{ account_data[13] }}</span>
+      </div>    
+    </section>   
+    <footer>
+      <p>&copy; 2023 Banking System</p>
+    </footer>
+  </body>
+</html>

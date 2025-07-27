@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Account Registration</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style_new_acc.css') }}"
+    />
+    <link rel="icon" href="static\photos\icon1.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <header>
+      <h1>Create a New Account</h1>
+      <div class="top-links">
+        <a href="javascript:history.back()" class="logout-link"><h3>Back</h3></a>
+        <a href="{{ url_for('logout') }}" class="logout-link"><h3>Logout</h3></a>
+      </div>
+    </header>
+    <div class="main">
+      <h2>Account Registration Form</h2>
+      <form action="/create_account" method="POST">
+        <label for="account_holder_name">Account Holder Name:</label>
+        <input type="text" name="account_holder_name" required value="{{ form.account_holder_name }}"/>
+
+        <label for="date_of_birth">Date of Birth:</label>
+        <input type="date" name="date_of_birth" required value="{{ form.date_of_birth }}" />
+        
+        <label for="bank">Bank:</label>
+        <select name="bank" id="bank" required value="{{ form.bank }}">
+          <option value="" selected disabled>Select Bank</option>
+          <option value="SBI">SBI</option>
+          <option value="HDFC">HDFC</option>
+          <option value="PNB">PNB</option>
+          <option value="Axis">Axis</option>
+          <option value="HSBC">HSBC</option>
+          <option value="ICICI">ICICI</option>
+        </select>
+        <label for="account_type_name">Account Type:</label>
+        <select name="account_type_name" id="account_type_name" required value="{{ form.account_type_name }}">
+          <option value="Savings">Savings</option>
+          <option value="Current">Current</option>
+        </select>
+
+        <label for="Verification_id_no">Verification ID:</label>
+        <input type="text" name="Verification_id_no" required value="{{ form.Verification_id_no}}"/>
+
+        <label for="contact_no">Conatct No.:</label>
+        <input type="text" name="contact_no" required value="{{ form.contact_no }}" />
+
+        <label for="email_id">Email ID:</label>
+        <input type="text" name="email_id" required value="{{ form.email_id }}"/>
+
+        <div id="otp-sent-message" style="display: none">OTP sent to your email.</div>
+
+        <label for="address">Address:</label>
+        <input type="text" name="address" required value="{{ form.address }}" />
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" required value="{{ form.password }}" />
+
+        <label for="account_opening_date">Opening Date:</label>
+        <input type="date" name="account_opening_date" id="account_opening_date" required value="{{ form.account_opening_date }}"/>
+
+        <label for="balance">Amount to deposit:</label>
+        <input type="text" name="balance" required value="{{ form.balance }}"/>
+        <div id="age-validation-message" class="error-message"></div>
+        <button type="button" id="send-otp-button">Send OTP</button>
+        <label for="otp">Enter OTP:</label>
+        <input type="text" name="otp" id="otp"  />
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flashes-container">
+            <ul class="flashes" style="color: red;">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+        <br>
+        <button type="submit">Create Account</button><br />
+      </form>
+    </div>
+    <footer>
+      <p>&copy; 2023 Banking System</p>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sendOtpButton = document.getElementById("send-otp-button");
+        sendOtpButton.addEventListener("click", function () {
+          const email = document.querySelector('input[name="email_id"]').value;
+          const otpInput = document.querySelector('input[name="otp"]');
+          fetch("/send_otp", {method: "POST",headers: { "Content-Type": "application/x-www-form-urlencoded" },body: `email_id=${email}`,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                alert("OTP sent successfully");
+              } 
+              else {
+                alert("Failed to send OTP. Please try again.");
+                // // Display the error message on incorrect OTP
+                // const errorMessage = document.getElementById("otp-error-message");
+                // errorMessage.textContent = 'Incorrect OTP. Please try again.';
+                otpInput.value = '';
+                
+              }
+            })
+            .catch((error) => {console.error("Error:", error);
+              alert("An error occurred. Please try again later.");
+            });
+        });
+      });
+    </script>
+        
+    <script>
+      // Function to calculate age based on DOB
+      function calculateAge(dob) {
+        const today = new Date();
+        const birthDate = new Date(dob);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 ||(monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+      }
+      function validateAge() {
+        const dobInput = document.querySelector('input[name="date_of_birth"]');
+        const openingDateInput = document.querySelector('input[name="account_opening_date"]');
+        const ageValidationMessage = document.getElementById("age-validation-message");
+        const dob = dobInput.value;
+        const openingDate = openingDateInput.value;
+        if (dob && openingDate) {
+          const age = calculateAge(dob);
+          const dobDate = new Date(dob);
+          const openingDateDate = new Date(openingDate);
+          const ageLimitDate = new Date();
+          ageLimitDate.setFullYear(ageLimitDate.getFullYear() - 18);
+          if (dobDate > ageLimitDate || openingDateDate < dobDate) {
+            ageValidationMessage.innerHTML ="Account can't be created if age is less than 18 years or opening date is before the date of birth.";
+            return false;
+          }
+        }
+        ageValidationMessage.innerHTML = " ";
+        return true;
+      }
+      const submitButton = document.querySelector('button[type="submit"]');
+      submitButton.addEventListener("click", function (event) {if (!validateAge()) {
+          event.preventDefault();
+        }
+      });
+    </script>
+    <script>
+      function setCurrentDate() {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+        const dd = String(today.getDate()).padStart(2, "0");
+        const currentDate = `${yyyy}-${mm}-${dd}`;
+        document.getElementById("account_opening_date").value = currentDate;
+      }
+      window.onload = setCurrentDate;
+    </script>
+  </body>
+</html>

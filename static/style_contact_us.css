@@ -1,0 +1,145 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.4) 50%), url(photos/14.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(45deg, #ff7200, #ff8c00);
+  color: #fff;
+  padding: 20px 24px;
+  box-shadow: 0 4px 15px rgba(255, 114, 0, 0.3);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 26px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header a.logout-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+header a.logout-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.contact-section {
+  text-align: center;
+  padding-top: 40px;
+}
+
+.contact-section h2 {
+  font-size: 28px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+
+main {
+  max-width: 700px;
+  margin: 25px auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+h1 {
+  font-size: 22px;
+  color: #0074a9;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.contact-section p {
+  color: #333;
+  line-height: 1.6;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.icons {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.icons a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 8px;
+}
+
+.icons ion-icon {
+  color: #333;
+  font-size: 24px;
+  padding: 8px;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  background: rgba(255, 114, 0, 0.1);
+}
+
+.icons ion-icon:hover {
+  color: #ff7200;
+  background: rgba(255, 114, 0, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 114, 0, 0.3);
+}
+
+footer {
+  text-align: center;
+  margin-top: 30px;
+  padding: 15px 0;
+  background: linear-gradient(45deg, #ff7200, #ff8c00);
+  color: #fff;
+  box-shadow: 0 -4px 15px rgba(255, 114, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  header h1 {
+    font-size: 22px;
+  }
+  
+  main {
+    margin: 15px 10px;
+    padding: 20px;
+  }
+  
+  .contact-section h2 {
+    font-size: 24px;
+  }
+  
+  .contact-section p {
+    font-size: 14px;
+  }
+  
+  .icons ion-icon {
+    font-size: 20px;
+  }
+}

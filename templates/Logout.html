@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_logout.css') }}">
+    <link rel="icon" href="static/photos/icon1.ico" type="image/x-icon">
+    <title>Logout - Fusion Bank</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Fusion Bank</h1>
+        <div class="header-actions">
+            <a href="{{ url_for('index') }}" class="home-link">
+                <ion-icon name="home-outline"></ion-icon>
+                <span>Home</span>
+            </a>
+        </div>
+    </header>
+    
+    <main>
+        <div class="logout-container">
+            <div class="logout-icon">
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+            </div>
+            
+            <div class="logout-content">
+                <h2>Successfully Logged Out</h2>
+                <p class="logout-message">
+                    Thank you for using Fusion Bank's online banking services. 
+                    Your session has been securely terminated.
+                </p>
+                
+                <div class="security-tips">
+                    <h3>Security Tips:</h3>
+                    <ul>
+                        <li>Always log out when using shared computers</li>
+                        <li>Clear your browser cache for added security</li>
+                        <li>Never share your login credentials</li>
+                        <li>Contact us immediately if you notice suspicious activity</li>
+                    </ul>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">
+                        <ion-icon name="log-in-outline"></ion-icon>
+                        Login Again
+                    </a>
+                    <a href="/home" class="btn btn-secondary">
+                        <ion-icon name="information-circle-outline"></ion-icon>
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="services-preview">
+            <h3>Our Services</h3>
+            <div class="services-grid">
+                <div class="service-item">
+                    <ion-icon name="card-outline"></ion-icon>
+                    <span>Account Management</span>
+                </div>
+                <div class="service-item">
+                    <ion-icon name="cash-outline"></ion-icon>
+                    <span>Loan Services</span>
+                </div>
+                <div class="service-item">
+                    <ion-icon name="shield-checkmark-outline"></ion-icon>
+                    <span>Secure Banking</span>
+                </div>
+                <div class="service-item">
+                    <ion-icon name="call-outline"></ion-icon>
+                    <span>24/7 Support</span>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Information</h4>
+                <p>
+                    <ion-icon name="call-outline"></ion-icon>
+                    1860-419-5555
+                </p>
+                <p>
+                    <ion-icon name="mail-outline"></ion-icon>
+                    support@fusionbank.com
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Fusion Bank. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Add a subtle animation when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutContainer = document.querySelector('.logout-container');
+            logoutContainer.style.opacity = '0';
+            logoutContainer.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                logoutContainer.style.transition = 'all 0.6s ease';
+                logoutContainer.style.opacity = '1';
+                logoutContainer.style.transform = 'translateY(0)';
+            }, 100);
+            
+            // Auto-redirect after 30 seconds (optional)
+            setTimeout(() => {
+                const countdown = document.createElement('div');
+                countdown.className = 'auto-redirect';
+                countdown.innerHTML = '<p>Redirecting to home page in <span id="countdown">10</span> seconds...</p>';
+                document.querySelector('.logout-content').appendChild(countdown);
+                
+                let timeLeft = 10;
+                const timer = setInterval(() => {
+                    timeLeft--;
+                    document.getElementById('countdown').textContent = timeLeft;
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        window.location.href = "{{ url_for('index') }}";
+                    }
+                }, 1000);
+            }, 20000); // Start countdown after 20 seconds
+        });
+    </script>
+</body>
+</html>

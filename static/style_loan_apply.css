@@ -1,0 +1,205 @@
+/* Enhanced Loan Application CSS with Consistent Styling */
+body {
+  background-color: #333333;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.4) 50%), url(photos/14.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  color: white;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(45deg, #ff7200, #ff8c00);
+  color: #fff;
+  padding: 20px 24px;
+  box-shadow: 0 4px 15px rgba(255, 114, 0, 0.3);
+}
+
+.top-links a {
+  display: inline-block;
+  margin-left: 20px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.top-links a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.main {
+  max-width: 900px;
+  margin: 30px auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  font-size: 30px;
+  color: #333;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  margin-top: 20px;
+}
+
+label {
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"] {
+  width: 95%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus {
+  border-color: #ff7200;
+  outline: none;
+  box-shadow: 0 0 15px rgba(255, 114, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+button {
+  background: linear-gradient(45deg, #ff7200, #ff8c00);
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: block;
+  margin: 30px auto 0;
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 114, 0, 0.3);
+}
+
+button:hover {
+  background: linear-gradient(45deg, #ff8c00, #ff9f00);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 114, 0, 0.4);
+}
+
+select {
+  padding: 15px;
+  font-size: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  width: 95%;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+}
+
+select:focus {
+  border-color: #ff7200;
+  outline: none;
+  box-shadow: 0 0 15px rgba(255, 114, 0, 0.2);
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  background: linear-gradient(45deg, #ff7200, #ff8c00);
+  color: #fff;
+  box-shadow: 0 -4px 15px rgba(255, 114, 0, 0.3);
+}
+
+.flashes-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  margin: 20px 0;
+}
+
+.flashes {
+  list-style: none;
+  font-size: 18px;
+  padding: 0;
+  text-align: center;
+  background: rgba(40, 167, 69, 0.1);
+  border: 2px solid #28a745;
+  border-radius: 10px;
+  padding: 15px;
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .top-links {
+    margin-top: 15px;
+  }
+  
+  .top-links a {
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  
+  .main {
+    margin: 20px 10px;
+    padding: 20px;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="date"] {
+    width: 90%;
+  }
+  
+  select {
+    width: 95%;
+  }
+  
+  h2 {
+    font-size: 24px;
+  }
+}
