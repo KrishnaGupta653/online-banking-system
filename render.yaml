@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: banking-app
+    env: docker  # since you're using Dockerfile
+    plan: free
+    buildFilter:
+      paths: ["Dockerfile", "render.yaml", "app.py", "requirements.txt"]
+    dockerfilePath: Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ENCRYPTION_KEY
+        generateValue: true
+      - key: DB_HOST
+        fromService:
+          type: pgsql
+          name: banking-db
+          property: host
+      - key: DB_NAME
+        fromService:
+          type: pgsql
+          name: banking-db
+          property: database
+      - key: DB_USER
+        fromService:
+          type: pgsql
+          name: banking-db
+          property: user
+      - key: DB_PASSWORD
+        fromService:
+          type: pgsql
+          name: banking-db
+          property: password
+
+  - type: pgsql
+    name: banking-db
+    plan: free
+    databaseName: bank
+    user: bankuser
