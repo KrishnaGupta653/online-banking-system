@@ -3,7 +3,6 @@ services:
     name: banking-db
     plan: starter
     databaseName: bank
-    user: postgres
 
   - type: web
     name: banking-app
