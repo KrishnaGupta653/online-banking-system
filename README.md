@@ -1,3 +1,4 @@
+
 # 🏦 Fusion Bank - Complete Online Banking System
 
 <div align="center">
@@ -16,30 +17,7 @@
 *A modern, secure, and feature-rich online banking system built with Flask and PostgreSQL*
 
 </div>
-
----
-
-## 📋 Table of Contents
-
-- [🎯 Project Overview](#-project-overview)
-- [✨ Key Features](#-key-features)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [🚀 Quick Start](#-quick-start)
-- [📦 Installation](#-installation)
-- [⚙️ Configuration](#️-configuration)
-- [🎮 Usage](#-usage)
-- [🔗 API Endpoints](#-api-endpoints)
-- [🛡️ Security Features](#️-security-features)
-- [🏗️ System Architecture](#️-system-architecture)
-- [🗄️ Database Schema](#️-database-schema)
-- [🧪 Testing](#-testing)
-- [🚀 Deployment](#-deployment)
-- [📁 Project Structure](#-project-structure)
-- [🐛 Troubleshooting](#-troubleshooting)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-
----
+<img width="2872" height="1446" alt="Screenshot 2025-07-29 050551" src="https://github.com/user-attachments/assets/b58eb3b4-1147-4035-91aa-629c62314605" />
 
 ## 🎯 Project Overview
 
