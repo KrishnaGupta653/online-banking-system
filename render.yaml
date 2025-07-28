@@ -40,5 +40,4 @@ services:
 databases:
   - name: banking-db
     databaseName: bank
-    user: postgres
     plan: starter
