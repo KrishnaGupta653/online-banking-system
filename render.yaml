@@ -1,13 +1,17 @@
 services:
+  - type: pgsql
+    name: banking-db
+    databaseName: bank
+    user: bankuser
+    region: oregon
+
   - type: web
     name: banking-app
-    env: docker  # since you're using Dockerfile
-    plan: free
-    buildFilter:
-      paths: ["Dockerfile", "render.yaml", "app.py", "requirements.txt"]
-    dockerfilePath: Dockerfile
-    healthCheckPath: /health
-    autoDeploy: true
+    env: python
+    region: oregon
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn --bind 0.0.0.0:$PORT app:app"
+    healthCheckPath: "/health"
     envVars:
       - key: FLASK_ENV
         value: production
@@ -15,29 +19,23 @@ services:
         generateValue: true
       - key: ENCRYPTION_KEY
         generateValue: true
-      - key: DB_HOST
-        fromService:
-          type: pgsql
+      - key: DATABASE_URL
+        fromDatabase:
           name: banking-db
-          property: host
-      - key: DB_NAME
-        fromService:
-          type: pgsql
-          name: banking-db
-          property: database
-      - key: DB_USER
-        fromService:
-          type: pgsql
-          name: banking-db
-          property: user
-      - key: DB_PASSWORD
-        fromService:
-          type: pgsql
-          name: banking-db
-          property: password
-
-  - type: pgsql
-    name: banking-db
-    plan: free
-    databaseName: bank
-    user: bankuser
+          property: connectionString
+      - key: RECAPTCHA_SITE_KEY
+        value: "your_recaptcha_site_key_here"
+      - key: RECAPTCHA_SECRET_KEY
+        value: "your_recaptcha_secret_key_here"
+      - key: MAIL_SERVER
+        value: "smtp.gmail.com"
+      - key: MAIL_PORT
+        value: "587"
+      - key: MAIL_USERNAME
+        value: "your_email@gmail.com"
+      - key: MAIL_PASSWORD
+        value: "your_app_password_here"
+      - key: MAIL_USE_TLS
+        value: "true"
+      - key: MAIL_USE_SSL
+        value: "false"
