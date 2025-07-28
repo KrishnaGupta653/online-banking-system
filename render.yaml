@@ -1,14 +1,12 @@
 services:
-  - type: pgsql
+  - type: postgresql
     name: banking-db
     databaseName: bank
     user: bankuser
-    region: oregon
 
   - type: web
     name: banking-app
     env: python
-    region: oregon
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn --bind 0.0.0.0:$PORT app:app"
     healthCheckPath: "/health"
