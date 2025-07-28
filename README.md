@@ -1,5 +1,5 @@
 
-# 🏦 Fusion Bank - Complete Online Banking System <img width="22" height="22" alt="logo" src="https://github.com/user-attachments/assets/d0e26788-27fb-4f75-a90c-6ca1ffe071d6" />
+# 🏦 Fusion Bank - Complete Online Banking System <img width="30" height="30" alt="logo" src="https://github.com/user-attachments/assets/d0e26788-27fb-4f75-a90c-6ca1ffe071d6" />
 
 <div align="center">
 
