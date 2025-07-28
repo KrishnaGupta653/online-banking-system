@@ -1,5 +1,5 @@
 services:
-  - type: postgre
+  - type: postgres
     name: banking-db
     databaseName: bank
     user: bankuser
