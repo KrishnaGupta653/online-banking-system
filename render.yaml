@@ -1,9 +1,4 @@
 services:
-  - type: pserv
-    name: banking-db
-    plan: starter
-
-
   - type: web
     name: banking-app
     env: python
@@ -41,3 +36,9 @@ services:
         value: "krishna.gupta3657@gmail.com"
       - key: MAIL_PASSWORD
         value: "xyrt vjye rjgj tess"
+
+databases:
+  - name: banking-db
+    databaseName: bank
+    user: postgres
+    plan: starter
