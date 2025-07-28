@@ -2,7 +2,7 @@ services:
   - type: pserv
     name: banking-db
     plan: starter
-    databaseName: bank
+
 
   - type: web
     name: banking-app
