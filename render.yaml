@@ -1,8 +1,9 @@
 services:
-  - type: postgres
+  - type: pserv
     name: banking-db
+    plan: starter
     databaseName: bank
-    user: bankuser
+    user: postgres
 
   - type: web
     name: banking-app
@@ -13,27 +14,31 @@ services:
     envVars:
       - key: FLASK_ENV
         value: production
+      - key: DEBUG
+        value: "False"
       - key: SECRET_KEY
-        generateValue: true
+        value: "721c12b9e2512ff9a7409b51382f770231d5f33dfbcd725e"
       - key: ENCRYPTION_KEY
-        generateValue: true
+        value: "Bc0TG0ffA8HHhFBVnYZfsGy5sU7IXipXBprTBzvoxXk="
       - key: DATABASE_URL
         fromDatabase:
           name: banking-db
           property: connectionString
+      - key: REDIS_URL
+        value: "memory://"
       - key: RECAPTCHA_SITE_KEY
-        value: "your_recaptcha_site_key_here"
+        value: "6LcRFZArAAAAAM0cTxjEnnAsHnywGq030LSJV6qE"
       - key: RECAPTCHA_SECRET_KEY
-        value: "your_recaptcha_secret_key_here"
+        value: "6LcRFZArAAAAAMMrUkZeDuZUCzAKKGOtsUNA4BKW"
       - key: MAIL_SERVER
         value: "smtp.gmail.com"
       - key: MAIL_PORT
         value: "587"
-      - key: MAIL_USERNAME
-        value: "your_email@gmail.com"
-      - key: MAIL_PASSWORD
-        value: "your_app_password_here"
       - key: MAIL_USE_TLS
-        value: "true"
+        value: "True"
       - key: MAIL_USE_SSL
-        value: "false"
+        value: "False"
+      - key: MAIL_USERNAME
+        value: "krishna.gupta3657@gmail.com"
+      - key: MAIL_PASSWORD
+        value: "xyrt vjye rjgj tess"
