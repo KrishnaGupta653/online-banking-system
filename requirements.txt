@@ -14,19 +14,17 @@
 # Flask-Talisman==1.1.0
 # redis==4.6.0
 
+
 Flask==2.3.3
 Flask-Mail==0.9.1
-psycopg2-binary==2.9.9
-requests==2.31.0
-cryptography==41.0.4
-qrcode==7.4.2
-python-dotenv==1.0.0
-gunicorn==21.2.0
-boto3==1.28.85
-botocore==1.31.85
+psycopg2-binary>=2.9.9
+requests>=2.31.0
+cryptography>=41.0.7
+qrcode[pil]>=7.4.2
+python-dotenv>=1.0.0
+gunicorn>=21.2.0
 Pillow>=10.2.0
-pytz==2023.3
-Flask-Limiter==3.5.0
-Flask-Talisman==1.1.0
-redis==4.6.0
-Werkzeug==2.3.7
+Flask-Limiter>=3.5.0
+Flask-Talisman>=1.1.0
+redis>=5.0.0
+Werkzeug>=2.3.7
