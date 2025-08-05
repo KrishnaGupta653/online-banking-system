@@ -1937,16 +1937,15 @@ if __name__ == "__main__":
     # if not debug_mode:
     #     app.logger.info("Starting production server")
     # app.run(host='0.0.0.0', port=port, debug=debug_mode)
-     try:
-        init_db()
-        app.logger.info("🚀 Starting Flask application...")
-    except Exception as e:
-        app.logger.error(f"Startup error: {str(e)}")
+        try:
+                init_db()
+                app.logger.info("🚀 Starting Flask application...")
+        except Exception as e:
+                app.logger.error(f"Startup error: {str(e)}")
     
-    port = int(os.environ.get('PORT', 5000))
-    debug_mode = os.getenv('FLASK_ENV') != 'production'
+        port = int(os.environ.get('PORT', 5000))
+        debug_mode = os.getenv('FLASK_ENV') != 'production'
     
-    if not debug_mode:
-        app.logger.info("Starting production server")
-    
-    app.run(host='0.0.0.0', port=port, debug=debug_mode)
+        if not debug_mode:
+                app.logger.info("Starting production server")
+        app.run(host='0.0.0.0', port=port, debug=debug_mode)
