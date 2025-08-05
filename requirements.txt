@@ -16,7 +16,7 @@
 
 Flask==2.3.3
 Flask-Mail==0.9.1
-psycopg2-binary==2.9.7
+psycopg2-binary==2.9.9
 requests==2.31.0
 cryptography==41.0.4
 qrcode==7.4.2
