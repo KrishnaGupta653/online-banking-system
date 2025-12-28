@@ -22,6 +22,9 @@ from decimal import Decimal
 from datetime import datetime, timezone, timedelta
 import urllib.parse as urlparse
 import resend
+# Add these imports with your other imports
+import sib_api_v3_sdk
+from sib_api_v3_sdk.rest import ApiException
 
 load_dotenv()
 resend.api_key = os.getenv('RESEND_API_KEY')
@@ -262,149 +265,459 @@ def login_required(f):
 #             return jsonify({'success': False, 'error_message': 'Failed to send OTP'})
 
 
+# @app.route('/send_otp', methods=['POST'])
+# @limiter.limit("5 per minute")
+# def send_otp():
+#     """Send OTP via Resend API"""
+#     try:
+#         email = request.form.get('email_id')
+        
+#         # Validation
+#         if not email:
+#             app.logger.error("No email provided")
+#             return jsonify({
+#                 'success': False, 
+#                 'error_message': 'Email is required'
+#             })
+        
+#         # Generate OTP
+#         correct_otp = str(random.randint(1000, 9999))
+#         session['correct_otp'] = correct_otp
+#         session['otp_timestamp'] = datetime.now(timezone.utc)
+        
+#         app.logger.info(f"Generated OTP {correct_otp} for {email}")
+        
+#         # Create professional HTML email
+#         html_body = f"""
+#         <!DOCTYPE html>
+#         <html>
+#         <head>
+#             <style>
+#                 body {{ font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; }}
+#                 .container {{ max-width: 600px; margin: 0 auto; }}
+#                 .header {{ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 20px; text-align: center; }}
+#                 .header h1 {{ margin: 0; font-size: 28px; }}
+#                 .content {{ padding: 40px 30px; background-color: #f8f9fa; }}
+#                 .otp-box {{ 
+#                     background-color: white; 
+#                     padding: 30px; 
+#                     text-align: center; 
+#                     margin: 25px 0;
+#                     border-radius: 10px;
+#                     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+#                 }}
+#                 .otp-code {{ 
+#                     color: #667eea; 
+#                     font-size: 56px; 
+#                     font-weight: bold;
+#                     letter-spacing: 18px; 
+#                     margin: 10px 0;
+#                     font-family: 'Courier New', monospace;
+#                 }}
+#                 .warning {{ 
+#                     background-color: #fff3cd; 
+#                     border-left: 4px solid #ffc107; 
+#                     padding: 15px; 
+#                     margin: 20px 0;
+#                     border-radius: 4px;
+#                 }}
+#                 .footer {{ 
+#                     color: #6c757d; 
+#                     font-size: 13px; 
+#                     margin-top: 30px; 
+#                     padding-top: 20px;
+#                     border-top: 2px solid #dee2e6;
+#                     text-align: center;
+#                 }}
+#             </style>
+#         </head>
+#         <body>
+#             <div class="container">
+#                 <div class="header">
+#                     <h1>🏦 Banking System</h1>
+#                     <p style="margin: 10px 0 0 0; font-size: 16px;">Secure Account Verification</p>
+#                 </div>
+#                 <div class="content">
+#                     <h2 style="color: #333; margin-top: 0;">Your One-Time Password</h2>
+#                     <p style="color: #555; font-size: 16px;">You requested an OTP to create a new bank account. Please use the code below to complete your registration:</p>
+                    
+#                     <div class="otp-box">
+#                         <p style="margin: 0; color: #6c757d; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">Your OTP Code</p>
+#                         <p class="otp-code">{correct_otp}</p>
+#                         <p style="margin: 0; color: #6c757d; font-size: 14px;">Valid for 10 minutes</p>
+#                     </div>
+                    
+#                     <div class="warning">
+#                         <strong>⏰ Important:</strong> This OTP will expire in 10 minutes for your security.
+#                     </div>
+                    
+#                     <div class="footer">
+#                         <p><strong>🔒 Security Tips:</strong></p>
+#                         <p>• Never share this OTP with anyone, including bank employees<br>
+#                         • We will never ask for your OTP via phone or email<br>
+#                         • If you didn't request this, please ignore this email</p>
+#                         <p style="margin-top: 20px; color: #adb5bd;">© 2024 Banking System. All rights reserved.</p>
+#                     </div>
+#                 </div>
+#             </div>
+#         </body>
+#         </html>
+#         """
+        
+#         # Plain text fallback
+#         text_body = f"""
+# Banking System - Your OTP Code
+
+# Your OTP for bank account creation is: {correct_otp}
+
+# This OTP will expire in 10 minutes.
+
+# Security reminder: Never share this OTP with anyone.
+
+# If you didn't request this, please ignore this email.
+#         """
+        
+#         # Send email via Resend
+#         try:
+#             params = {
+#                 "from": "Banking System <onboarding@resend.dev>",
+#                 "to": [email],
+#                 "subject": "Your Banking OTP - Valid for 10 Minutes",
+#                 "html": html_body,
+#                 "text": text_body
+#             }
+            
+#             result = resend.Emails.send(params)
+            
+#             app.logger.info(f"✅ OTP sent successfully via Resend. Email ID: {result.get('id')}")
+#             return jsonify({
+#                 'success': True,
+#                 'message': 'OTP sent successfully to your email'
+#             })
+            
+#         except Exception as email_error:
+#             app.logger.error(f"❌ Resend API error: {str(email_error)}", exc_info=True)
+#             return jsonify({
+#                 'success': False, 
+#                 'error_message': 'Failed to send OTP. Please check your email address and try again.'
+#             })
+            
+#     except Exception as e:
+#         app.logger.error(f"❌ OTP generation error: {str(e)}", exc_info=True)
+#         return jsonify({
+#             'success': False, 
+#             'error_message': 'An error occurred. Please try again.'
+#         })
+
+
 @app.route('/send_otp', methods=['POST'])
 @limiter.limit("5 per minute")
 def send_otp():
-    """Send OTP via Resend API"""
+    """
+    Send OTP via Brevo Transactional Email API
+    FREE: 300 emails/day forever
+    """
     try:
+        # Get email from form
         email = request.form.get('email_id')
         
         # Validation
-        if not email:
+        if not email or not email.strip():
             app.logger.error("No email provided")
             return jsonify({
                 'success': False, 
-                'error_message': 'Email is required'
+                'error_message': 'Email address is required'
             })
         
-        # Generate OTP
+        # Generate 4-digit OTP
         correct_otp = str(random.randint(1000, 9999))
+        
+        # Store in session with timestamp
         session['correct_otp'] = correct_otp
         session['otp_timestamp'] = datetime.now(timezone.utc)
         
-        app.logger.info(f"Generated OTP {correct_otp} for {email}")
+        app.logger.info(f"🔐 Generated OTP {correct_otp} for {email}")
         
-        # Create professional HTML email
-        html_body = f"""
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <style>
-                body {{ font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; }}
-                .container {{ max-width: 600px; margin: 0 auto; }}
-                .header {{ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 20px; text-align: center; }}
-                .header h1 {{ margin: 0; font-size: 28px; }}
-                .content {{ padding: 40px 30px; background-color: #f8f9fa; }}
-                .otp-box {{ 
-                    background-color: white; 
-                    padding: 30px; 
-                    text-align: center; 
-                    margin: 25px 0;
-                    border-radius: 10px;
-                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                }}
-                .otp-code {{ 
-                    color: #667eea; 
-                    font-size: 56px; 
-                    font-weight: bold;
-                    letter-spacing: 18px; 
-                    margin: 10px 0;
-                    font-family: 'Courier New', monospace;
-                }}
-                .warning {{ 
-                    background-color: #fff3cd; 
-                    border-left: 4px solid #ffc107; 
-                    padding: 15px; 
-                    margin: 20px 0;
-                    border-radius: 4px;
-                }}
-                .footer {{ 
-                    color: #6c757d; 
-                    font-size: 13px; 
-                    margin-top: 30px; 
-                    padding-top: 20px;
-                    border-top: 2px solid #dee2e6;
-                    text-align: center;
-                }}
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <div class="header">
-                    <h1>🏦 Banking System</h1>
-                    <p style="margin: 10px 0 0 0; font-size: 16px;">Secure Account Verification</p>
-                </div>
-                <div class="content">
-                    <h2 style="color: #333; margin-top: 0;">Your One-Time Password</h2>
-                    <p style="color: #555; font-size: 16px;">You requested an OTP to create a new bank account. Please use the code below to complete your registration:</p>
-                    
-                    <div class="otp-box">
-                        <p style="margin: 0; color: #6c757d; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">Your OTP Code</p>
-                        <p class="otp-code">{correct_otp}</p>
-                        <p style="margin: 0; color: #6c757d; font-size: 14px;">Valid for 10 minutes</p>
-                    </div>
-                    
-                    <div class="warning">
-                        <strong>⏰ Important:</strong> This OTP will expire in 10 minutes for your security.
-                    </div>
-                    
-                    <div class="footer">
-                        <p><strong>🔒 Security Tips:</strong></p>
-                        <p>• Never share this OTP with anyone, including bank employees<br>
-                        • We will never ask for your OTP via phone or email<br>
-                        • If you didn't request this, please ignore this email</p>
-                        <p style="margin-top: 20px; color: #adb5bd;">© 2024 Banking System. All rights reserved.</p>
-                    </div>
-                </div>
+        # ==========================================
+        # CREATE HTML EMAIL CONTENT
+        # ==========================================
+        html_content = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        body {{ 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }}
+        .email-container {{
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }}
+        .header {{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }}
+        .header h1 {{
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }}
+        .header p {{
+            font-size: 16px;
+            opacity: 0.95;
+        }}
+        .content {{
+            padding: 40px 30px;
+        }}
+        .greeting {{
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+        }}
+        .message {{
+            font-size: 16px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }}
+        .otp-box {{
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+        }}
+        .otp-label {{
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }}
+        .otp-code {{
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            letter-spacing: 15px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }}
+        .otp-expiry {{
+            font-size: 14px;
+            color: #666;
+            margin-top: 15px;
+        }}
+        .warning-box {{
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }}
+        .warning-box p {{
+            color: #856404;
+            font-size: 14px;
+            margin: 5px 0;
+        }}
+        .security-section {{
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid #dee2e6;
+        }}
+        .security-section h3 {{
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }}
+        .security-section ul {{
+            list-style: none;
+            padding: 0;
+        }}
+        .security-section li {{
+            color: #555;
+            font-size: 14px;
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }}
+        .security-section li:before {{
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }}
+        .footer {{
+            text-align: center;
+            padding: 30px;
+            background-color: #f8f9fa;
+            color: #6c757d;
+            font-size: 13px;
+            border-top: 1px solid #dee2e6;
+        }}
+        .footer p {{
+            margin: 5px 0;
+        }}
+        @media only screen and (max-width: 600px) {{
+            .header {{ padding: 30px 20px; }}
+            .content {{ padding: 30px 20px; }}
+            .otp-code {{ font-size: 36px; letter-spacing: 10px; }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏦 Banking System</h1>
+            <p>Secure Account Verification</p>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <div class="greeting">
+                Hello,
             </div>
-        </body>
-        </html>
+            
+            <div class="message">
+                You requested a One-Time Password (OTP) to create a new bank account. 
+                Please use the verification code below to complete your registration:
+            </div>
+            
+            <!-- OTP Box -->
+            <div class="otp-box">
+                <div class="otp-label">Your OTP Code</div>
+                <div class="otp-code">{correct_otp}</div>
+                <div class="otp-expiry">⏱️ Valid for 10 minutes only</div>
+            </div>
+            
+            <!-- Warning -->
+            <div class="warning-box">
+                <p><strong>⚠️ Important:</strong> This OTP will expire in 10 minutes for your security.</p>
+            </div>
+            
+            <!-- Security Tips -->
+            <div class="security-section">
+                <h3>🔒 Security Guidelines</h3>
+                <ul>
+                    <li>Never share this OTP with anyone, including bank employees</li>
+                    <li>Our team will never ask for your OTP via phone or email</li>
+                    <li>If you didn't request this code, please ignore this email</li>
+                    <li>Always verify you're on our official website before entering OTP</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Banking System</strong></p>
+            <p>Secure • Reliable • Trusted</p>
+            <p style="margin-top: 15px;">© 2024 Banking System. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
         """
         
-        # Plain text fallback
-        text_body = f"""
+        # Plain text version (for email clients that don't support HTML)
+        text_content = f"""
 Banking System - Your OTP Code
 
-Your OTP for bank account creation is: {correct_otp}
+Hello,
 
-This OTP will expire in 10 minutes.
+Your One-Time Password (OTP) for bank account creation is:
 
-Security reminder: Never share this OTP with anyone.
+    {correct_otp}
 
-If you didn't request this, please ignore this email.
+This OTP is valid for 10 MINUTES ONLY.
+
+SECURITY REMINDERS:
+✓ Never share this OTP with anyone
+✓ We will never ask for your OTP via phone or email
+✓ If you didn't request this, please ignore this email
+
+© 2024 Banking System
+Secure • Reliable • Trusted
         """
         
-        # Send email via Resend
+        # ==========================================
+        # SEND EMAIL VIA BREVO API
+        # ==========================================
         try:
-            params = {
-                "from": "Banking System <onboarding@resend.dev>",
-                "to": [email],
-                "subject": "Your Banking OTP - Valid for 10 Minutes",
-                "html": html_body,
-                "text": text_body
+            # Configure Brevo API
+            configuration = sib_api_v3_sdk.Configuration()
+            configuration.api_key['api-key'] = os.getenv('BREVO_API_KEY')
+            
+            # Create API instance for transactional emails
+            api_instance = sib_api_v3_sdk.TransactionalEmailsApi(
+                sib_api_v3_sdk.ApiClient(configuration)
+            )
+            
+            # Define sender
+            sender = {
+                "name": os.getenv('BREVO_SENDER_NAME', 'Banking System'),
+                "email": os.getenv('BREVO_SENDER_EMAIL', 'krishna3657777@gmail.com')
             }
             
-            result = resend.Emails.send(params)
+            # Define recipient
+            to = [{"email": email}]
             
-            app.logger.info(f"✅ OTP sent successfully via Resend. Email ID: {result.get('id')}")
+            # Create email object
+            send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
+                to=to,
+                sender=sender,
+                subject="🏦 Your Banking OTP - Valid for 10 Minutes",
+                html_content=html_content,
+                text_content=text_content
+            )
+            
+            # Send the email
+            api_response = api_instance.send_transac_email(send_smtp_email)
+            
+            # Success
+            app.logger.info(f"✅ OTP sent successfully via Brevo to {email}")
+            app.logger.info(f"📧 Brevo Message ID: {api_response.message_id}")
+            
             return jsonify({
                 'success': True,
-                'message': 'OTP sent successfully to your email'
+                'message': 'OTP sent successfully! Please check your email.'
             })
             
-        except Exception as email_error:
-            app.logger.error(f"❌ Resend API error: {str(email_error)}", exc_info=True)
+        except ApiException as e:
+            # Brevo API error
+            error_body = e.body if hasattr(e, 'body') else str(e)
+            app.logger.error(f"❌ Brevo API error: {error_body}", exc_info=True)
+            
             return jsonify({
                 'success': False, 
                 'error_message': 'Failed to send OTP. Please check your email address and try again.'
             })
             
     except Exception as e:
-        app.logger.error(f"❌ OTP generation error: {str(e)}", exc_info=True)
+        # General error
+        app.logger.error(f"❌ Unexpected error in send_otp: {str(e)}", exc_info=True)
         return jsonify({
             'success': False, 
-            'error_message': 'An error occurred. Please try again.'
+            'error_message': 'An unexpected error occurred. Please try again.'
         })
+
 @app.route('/')
 def index():
     return render_template('index.html', recaptcha_site_key=RECAPTCHA_SITE_KEY)
